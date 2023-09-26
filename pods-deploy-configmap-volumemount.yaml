@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-config-pod-01
+spec:
+  containers:
+  - name: myctr
+    image: busybox
+    command: ['sh','-c','echo $(myvalue) && sleep 3600']
+    volumeMounts:
+      - name:  config-volume
+        mountPath: /etc/config
+  volumes:
+      - name:  config-volume
+        configMap:
+         name: literal-config 
+    
